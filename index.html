@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+  <title>Register</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+<body>
+  <div class="Container">
+    <div class="header">
+      <h2>REGISTER HERE</h2>
+    </div>
+    <form class="form" id="form" onsubmit="return validate()" action="login.html">
+
+      <div class="form-control" onkeyup="checkfullname(fullname)">
+        <label>Full Name</label>
+        <input type="text" name="" id="fullname" placeholder="First_Name   Middle_Name  LastName" maxlength="20" autocomplete="off" />
+        <small>Error msg</small>
+      </div>
+
+      <div class="form-control" onkeyup="checkfirstname(firstname)">
+        <label>First Name</label>
+        <input type="text" name="" id="firstname" placeholder="Please Enter your first name" maxlength="15" autocomplete="off"
+          onkeypress="return AvoidSpace(event)" />
+        <small>Error msg</small>
+      </div>
+
+      <div class="form-control" onkeyup="checklastname(lastname)">
+        <label>Last Name</label>
+        <input type="text" name="" id="lastname" placeholder="Please Enter your last name" maxlength = "15" autocomplete="off"
+          onkeypress="return AvoidSpace(event)" />
+        <small>Error msg</small>
+      </div>
+
+      <div class="form-control" onkeyup="checkuserid(userid)">
+        <label>User Id</label>
+        <input type="text" name="" id="userid" placeholder="Please Enter your User Id" maxlength = "15" autocomplete="off"
+          onkeypress="return AvoidSpace(event)" />
+        <small>Error msg</small>
+      </div>
+
+      <div class="form-control" onkeyup="checkEmail(Email)">
+        <label>Email</label>
+        <input type="text" name="" id="Email" placeholder="Please Enter your Valid email id" autocomplete="off"
+          onkeypress="return AvoidSpace(event)" />
+        <small>Error msg</small>
+      </div>
+
+      <div class="form-control">
+        <label for="Date">Date</label>
+        <input type="date" id="date" name="trip-start"
+     value="2023-07-07"
+     min="1930-01-01" max="2004-07-12">
+      </div>
+
+      <!-- <div class="form-control" onkeyup="checkphone(phone)">
+        <label>Phone number</label>
+        <input type="number" name="" id="phone" placeholder="Enter your Phone number" autocomplete="off"  onkeypress="return AvoidSpace(event)" />
+        <small>Error msg</small>
+      </div> -->
+
+      <div class="form-control">
+          <div><label>User Mobile Number</label></div>
+          <input class="inputClass" id="inMob" type="number" name="inMob"
+              onkeyup="mobileInputAction()" onclick="mobileInputAction()" />
+          <ul style="list-style:none;">
+              <li id="mobileValid"></li>
+          </ul>
+      </div>
+
+      <div class="form-control">
+        <label for="profession">Select your Profession:</label>
+        <select class="prof" required>
+          <option value = "--Select--"></option>
+          <option value = "1">Student</option>
+          <option value = "2">Employee</option>
+          <option value = "3">Trainee</option>
+        </select>
+      </div>
+
+      <div class="form-control" onkeyup=" checkurl(url)">
+        <label>Please Upload Your Profile URL</label>
+        <input type="link" name="" id="url" placeholder="https://example.com" autocomplete="off"
+          onkeypress="return AvoidSpace(event)" />
+        <small>Error msg</small>
+      </div>
+
+      <div class="form-control" onkeyup=" checkPassword(password)">
+        <label>Password</label>
+        <input type="password" name="" id="password" placeholder="Please Enter your Password" autocomplete="off"
+          onkeypress="return AvoidSpace(event)" />
+        <small>Error msg</small>
+      </div>
+
+      <div class="form-control" onkeyup="checkPasswordsMatch(password,confirmpassword)">
+        <label>Confirm Password</label>
+        <input type="password" name="" id="confirmpassword" placeholder="Please Enter your Password Again " autocomplete="off"
+          onkeypress="return AvoidSpace(event)" />
+        <small>Errormsg</small>
+      </div>
+
+      <div class="form-control">
+        <label id="genderLabel">Gender:</label>
+        <div class="genderClass">
+          <div id="genderSubDiv1">
+            <input type="radio" name="gender" id="radio1" value="Male" onclick="isGenderSelected()" />
+            <label for="radio1">Male</label>
+          </div>
+          <div id="genderSubDiv2">
+            <input type="radio" name="gender" id="radio2" value="Female" onclick="isGenderSelected()" />
+            <label for="radio2">Female</label>
+          </div>
+          <div id="genderSubDiv3">
+            <input type="radio" name="gender" id="radio3" value="Other" onclick="isGenderSelected()" />
+            <label for="radio3">Other</label>
+          </div>
+        </div>
+        
+        <p id="showGenderError"></p>
+      </div>
+      <div class="form-control">
+        <label>Please  Upload  Profile Picture</label>
+        <input type="file" id="file" onchange="return imageValidation()" />
+        <div id="imagePreview"></div>
+      </div>
+      <div class="form-control">
+        <label>Please Upload Document File</label>
+        <input type="file" id="docfile" onchange="return fileValidation()" />
+        <div id="filePreview"></div>
+      </div>
+      <div class="">
+      <div class="form-control">
+        <label>Please Describe yourself </label>
+          <textarea id="inputFeild" cols="50" rows="3" maxlength="50"
+            placeholder="Minimum 50 characters necessary" required></textarea>
+      </div>
+      <label for="accept">
+          <input type="checkbox" id="accept" name="accept" value="yes" required />
+          Accept Terms and Conditions
+      </label>
+      </div>
+
+      <input type="submit" value="Click here to submit" class="button">
+      <p>Already Have An Account ?<a href="login.html">Login</a></p>
+
+    </form>
+  </div>
+  <script src="index.js"></script>
+</body>
+
+</html>
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Here</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+<body>
+  <div class="Container">
+    <div class="header">
+      <h2>REGISTER HERE</h2>
+    </div>
+    <form class="form" id="form" onsubmit="return validate()" action="login.html">
+
+      <div class="form-control" onkeyup="checkfullname(fullname)">
+        <label>Full Name</label>
+        <input type="text" name="" id="fullname" placeholder=" Please Enter your Full Name" autocomplete="off"
+          maxlength="20" />
+        <small>Error msg</small>
+      </div>
+
+      <div class="form-control" onkeyup="checkfirstname(firstname)">
+        <label>First Name</label>
+        <input type="text" name="" id="firstname" placeholder="Please Enter your First Name" autocomplete="off"
+          maxlength="20" onkeypress="return AvoidSpace(event)" />
+        <small>Error msg</small>
+      </div>
+
+      <div class="form-control" onkeyup="checklastname(lastname)">
+        <label>Last Name</label>
+        <input type="text" name="" id="lastname" placeholder=" Please Enter your Last Name" autocomplete="off"   maxlength="20"
+          onkeypress="return AvoidSpace(event)" />
+        <small>Error msg</small>
+      </div>
+
+      <div class="form-control" onkeyup="checkuserid(userid)">
+        <label>User Id</label>
+        <input type="text" name="" id="userid" placeholder="Please Enter your User Id" autocomplete="off"   maxlength="20"
+          onkeypress="return AvoidSpace(event)" />
+        <small>Error msg</small>
+      </div>
+
+      <div class="form-control" onkeyup="checkEmail(Email)">
+        <label>Email</label>
+        <input type="text" name="" id="Email" placeholder=" Please Enter your email id" autocomplete="off"    maxlength="20"
+          onkeypress="return AvoidSpace(event)" />
+        <small>Error msg</small>
+      </div>
+
+      <div class="form-control" onkeyup="checkphone(phone)">
+        <label>Phone number</label>
+        <input type="number" name="" id="phone" placeholder=" Please Enter your Phone number" autocomplete="off"    maxlength="10"
+          onkeypress="return AvoidSpace(event)" />
+        <small>Error msg</small>
+      </div>
+      <div class="form-control">
+        <label for="profession">Select your Profession:</label>
+        <select class="prof" required>
+          <option value="1">Student</option>
+          <option value="2">Employed</option>
+          <option value="3">Un-employed</option>
+        </select>
+      </div>
+
+      <div class="form-control" onkeyup=" checkurl(url)">
+        <label>Please enter your profile URL</label>
+        <input type="link" name="" id="url" placeholder="https://example.com" autocomplete="off"
+          onkeypress="return AvoidSpace(event)" />
+        <small>Error msg</small>
+      </div>
+
+      <div class="form-control" onkeyup=" checkPassword(password)">
+        <label>Password</label>
+        <input type="password" name="" id="password" placeholder="Please Enter your Password" autocomplete="off"   maxlength="8"
+          onkeypress="return AvoidSpace(event)" />
+        <small>Error msg</small>
+      </div>
+
+      <div class="form-control" onkeyup="checkPasswordsMatch(password,confirmpassword)">
+        <label>Confirm Password</label>
+        <input type="password" name="" id="confirmpassword" placeholder="Please Enter your Password Again "
+          autocomplete="off" onkeypress="return AvoidSpace(event)" />
+        <small>Errormsg</small>
+      </div>
+
+      <div class="form-control">
+        <label id="genderLabel"> Please Select Your Gender</label>
+        <div id="genderSubDiv1">
+          <input type="radio" name="gender" id="radio1" value="Male" onclick="isGenderSelected()" />
+          <label for="radio1">Male</label>
+        </div>
+
+        <div id="genderSubDiv2">
+          <input type="radio" name="gender" id="radio2" value="Female" onclick="isGenderSelected()" />
+          <label for="radio2">Female</label>
+        </div>
+        <div id="genderSubDiv3">
+          <input type="radio" name="gender" id="radio3" value="Other" onclick="isGenderSelected()" />
+          <label for="radio3">Other</label>
+        </div>
+        <p id="showGenderError"></p>
+      </div>
+      <div class="form-control">
+        <label>Please Upload your Profile Picture</label>
+        <input type="file" id="file" onchange="return imageValidation()" />
+        <div id="imagePreview"></div>
+      </div>
+      <div class="form-control">
+        <label>Please Upload Your Document File</label>
+        <input type="file" id="docfile" onchange="return fileValidation()" />
+        <div id="filePreview"></div>
+      </div>
+      <div class="">
+        <div class="form-control">
+          <label>Describe yourself </label>
+          <textarea id="inputFeild" cols="50" rows="3" minlength="50" placeholder="Minimum 50 characters necessary"   maxlength="50"
+            required></textarea>
+        </div>
+        <label for="accept">
+          <input type="checkbox" id="accept" name="accept" value="yes" required />
+          Accept Terms and Conditions
+        </label>
+      </div>
+
+      <input type="submit" value="Click here to submit" class="button">
+      <p>Already Have An Account ?<a href="login.html">Login</a></p>
+
+    </form>
+  </div>
+  <script src="index.js"></script>
+</body>
+
+</html> -->
